@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config'; 
 import { WorkdaysModule } from './workdays/workdays.module';
 import { UsersModule } from './users/users.module';
-import { LogsModule } from './logs/logs.module';
+import { LogsModule } from './audit-logs/logs.module'; // Klasör adı değişti
 import { WorkDay } from './entities/workday.entity';
 import { User } from './entities/user.entity';
 import { Log } from './entities/log.entity';

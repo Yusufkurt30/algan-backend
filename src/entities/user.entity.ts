@@ -2,24 +2,25 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn() // Otomatik artan ID (1, 2, 3...)
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string; // Ad Soyad
+  name: string;
+
+  @Column({ unique: true })
+  username: string;
 
   @Column()
-  username: string; // Kullanıcı Adı (V41'deki 'user' değişkeni)
+  password: string;
 
   @Column()
-  password: string; // Şifre
+  unit: string; // 'Yönetim', 'Aviyonik' vb.
 
   @Column()
   role: string; // 'admin', 'head', 'member'
 
-  @Column()
-  unit: string; // 'Aviyonik', 'Yazılım' vb.
-
-  @Column("simple-array", { nullable: true }) 
-  managedIds: string[]; // Yetkili olduğu kişilerin ID listesi (V41'deki managedIds)
+  // --- İŞTE EKSİK OLAN PARÇA BU ---
+  @Column("simple-array", { nullable: true })
+  managedIds: string[]; // Yetki verilen kişilerin ID'leri burada tutulacak
 }

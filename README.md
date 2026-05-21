@@ -6,7 +6,7 @@ Anavatanı gökler olan Algan İHA Takımı'nın ekip üyelerinin çalışma gü
 * **Yusuf KURT** - 22247010 (Elektrik-Elektronik Mühendisliği)
 * **Hüseyin UYGUN** - 21247076
 * **Ramdan Almjaidi** - 21247814
-* **Yiğit ÇALIŞKAN** - 22222222
+* **Yiğit ÇALIŞKAN** - 22247048
 
 ## 🚀 Teknolojik Altyapı (Tech Stack)
 * **Framework:** NestJS 11 (TypeScript tabanlı, modüler ve ölçeklenebilir mimari)

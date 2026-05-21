@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -11,16 +12,18 @@ export class User {
   @Column({ unique: true })
   username: string;
 
+  // @Exclude() → JSON serialize edilirken bu alan response'a dahil edilmez.
+  // Controller'da ClassSerializerInterceptor aktif olduğunda otomatik çalışır.
+  @Exclude()
   @Column()
   password: string;
 
   @Column()
-  unit: string; // 'Yönetim', 'Aviyonik' vb.
+  unit: string; // 'Yönetim', 'Aviyonik', vb.
 
   @Column()
   role: string; // 'admin', 'head', 'member'
 
-  // --- İŞTE EKSİK OLAN PARÇA BU ---
-  @Column("simple-array", { nullable: true })
-  managedIds: string[]; // Yetki verilen kişilerin ID'leri burada tutulacak
+  @Column('simple-array', { nullable: true })
+  managedIds: string[];
 }

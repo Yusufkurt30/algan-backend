@@ -19,7 +19,8 @@ import { UsersModule } from '../users/users.module';
       useFactory: (config: ConfigService) => ({
         secret: config.getOrThrow<string>('JWT_SECRET'),
         signOptions: {
-          expiresIn: config.get<string>('JWT_EXPIRES_IN', '24h'),
+          // Tür uyuşmazlığını çözmek için "as any" eklendi
+          expiresIn: config.get<string>('JWT_EXPIRES_IN', '24h') as any,
         },
       }),
     }),

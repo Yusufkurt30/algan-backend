@@ -4,9 +4,14 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // BU SATIR ÇOK ÖNEMLİ: React'ın bağlanmasına izin verir
-  app.enableCors(); 
+  // Canlıdaki Vercel sitesine ve yerel test ortamına (localhost) izin veriyoruz
+  app.enableCors({
+    origin: ['https://algan-frontend.vercel.app', 'http://localhost:5173'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  }); 
   
-  await app.listen(3000);
+  // Dağıtım platformlarında (Render vb.) port dinamik atandığı için process.env.PORT kontrolü ekliyoruz
+  await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

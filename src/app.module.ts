@@ -7,6 +7,7 @@ import { LogsModule } from './audit-logs/logs.module'; // Klasör adı değişti
 import { WorkDay } from './entities/workday.entity';
 import { User } from './entities/user.entity';
 import { Log } from './entities/log.entity';
+import { AiModule } from './ai/ai.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Log } from './entities/log.entity';
     WorkdaysModule,
     UsersModule,
     LogsModule,
+    AiModule,
   ],
 })
 export class AppModule {}

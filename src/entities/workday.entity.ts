@@ -5,9 +5,9 @@ export class WorkDay {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
-  date: string; // "2026-01-18" ISO format
+  @Column()
+  date: string; // "2026-01-18" gibi
 
   @Column()
-  description: string; // "Ara Tatil 1. Gün"
+  description: string; // "Ara Tatil 1. Gün" gibi
 }

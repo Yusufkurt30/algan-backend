@@ -6,17 +6,17 @@ export class Log {
   id: number;
 
   @Column()
-  userId: number;
+  userId: number; // Hangi üye?
 
   @Column()
-  date: string; // "2026-01-18"
+  date: string; // Hangi gün?
 
   @Column()
-  status: string; // 'present' | 'absent'
+  status: string; // 'present' (geldi) veya 'absent' (gelmedi)
 
-  @Column({ nullable: true })
+  @Column({ nullable: true }) // Boş olabilir (henüz girmediyse)
   timeIn: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true }) // Boş olabilir (henüz çıkmadıysa)
   timeOut: string;
 }

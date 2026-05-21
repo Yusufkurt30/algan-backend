@@ -1,39 +1,32 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config'; 
 import { WorkdaysModule } from './workdays/workdays.module';
 import { UsersModule } from './users/users.module';
-import { LogsModule } from './audit-logs/logs.module';
-import { AuthModule } from './auth/auth.module';
+import { LogsModule } from './audit-logs/logs.module'; // Klasör adı değişti
 import { WorkDay } from './entities/workday.entity';
 import { User } from './entities/user.entity';
 import { Log } from './entities/log.entity';
 
 @Module({
   imports: [
-    // .env dosyasını otomatik yükler; tüm modüllerde erişilebilir
-    ConfigModule.forRoot({ isGlobal: true }),
-
-    // Veritabanı bağlantısı – ConfigService ile ortam değişkenlerinden okunur.
-    // synchronize: false → production'da şema değişikliklerini siz yönetirsiniz.
-    // Migration kullanmak için: `typeorm migration:run` komutunu kullanın.
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        url: config.get<string>('DATABASE_URL'),
-        entities: [WorkDay, User, Log],
-        synchronize: false, // ⚠️ Production için kesinlikle false olmalı
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      }),
+    // Ortam değişkenlerini (.env) okumak için gerekli
+    ConfigModule.forRoot(),
+    
+    // Veritabanı Bağlantısı
+    TypeOrmModule.forRoot({
+      type: 'postgres', // Artık PostgreSQL kullanıyoruz
+      url: process.env.DATABASE_URL, // Render'ın bize vereceği linki buraya otomatik koyacak
+      entities: [WorkDay, User, Log], // Senin 3 tablon
+      synchronize: true, // Tabloları otomatik oluşturur (Canlıda false olması önerilir ama şimdilik true kalsın)
+      ssl: {
+        rejectUnauthorized: false, // Neon veritabanına güvenli bağlanmak için şart
+      },
     }),
-
-    AuthModule,
-    UsersModule,
+    
+    // Senin Modüllerin
     WorkdaysModule,
+    UsersModule,
     LogsModule,
   ],
 })

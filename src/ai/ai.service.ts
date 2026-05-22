@@ -18,7 +18,7 @@ export class AiService {
   async analyzePerformance(logData: any): Promise<string> {
     try {
       // Hızlı ve mantıksal analizler için flash modelini kullanıyoruz
-      const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = this.genAI.getGenerativeModel({ model: 'gemini-pro' });
 
       // Dokümantasyondaki role büründürme (Prompt Engineering) şablonu
       const prompt = `

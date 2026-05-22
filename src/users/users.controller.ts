@@ -1,9 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  // Frontend'den gelen giriş isteklerini karşılayacak yeni uç nokta
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  login(@Body() body: { username: string, password: string }) {
+    return this.usersService.login(body.username, body.password);
+  }
 
   @Post()
   create(@Body() body: any) {

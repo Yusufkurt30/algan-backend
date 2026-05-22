@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config'; 
+import { ConfigModule } from '@nestjs/config';
 import { WorkdaysModule } from './workdays/workdays.module';
 import { UsersModule } from './users/users.module';
 import { LogsModule } from './audit-logs/logs.module'; // Klasör adı değişti
@@ -13,7 +13,7 @@ import { AiModule } from './ai/ai.module';
   imports: [
     // Ortam değişkenlerini (.env) okumak için gerekli
     ConfigModule.forRoot(),
-    
+
     // Veritabanı Bağlantısı
     TypeOrmModule.forRoot({
       type: 'postgres', // Artık PostgreSQL kullanıyoruz
@@ -24,7 +24,7 @@ import { AiModule } from './ai/ai.module';
         rejectUnauthorized: false, // Neon veritabanına güvenli bağlanmak için şart
       },
     }),
-    
+
     // Senin Modüllerin
     WorkdaysModule,
     UsersModule,

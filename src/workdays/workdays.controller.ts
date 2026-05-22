@@ -1,18 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { WorkdaysService } from './workdays.service';
+import { CreateWorkdayDto } from './dto/create-workday.dto';
+import { UpdateWorkdayDto } from './dto/update-workday.dto';
 
 @Controller('workdays')
 export class WorkdaysController {
   constructor(private readonly workdaysService: WorkdaysService) {}
 
   @Post()
-  create(@Body() body: any) {
-    // Eğer gelen veri bir LİSTE (Array) ise toplu ekleme yap
-    if (Array.isArray(body)) {
-      return this.workdaysService.createBulk(body);
-    }
-    // Değilse tekli ekleme yap
-    return this.workdaysService.create(body);
+  create(@Body() createWorkdayDto: CreateWorkdayDto | CreateWorkdayDto[]) {
+    return this.workdaysService.create(createWorkdayDto);
   }
 
   @Get()
@@ -26,8 +31,8 @@ export class WorkdaysController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.workdaysService.update(+id, body);
+  update(@Param('id') id: string, @Body() updateWorkdayDto: UpdateWorkdayDto) {
+    return this.workdaysService.update(+id, updateWorkdayDto);
   }
 
   @Delete(':id')

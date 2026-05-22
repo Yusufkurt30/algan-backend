@@ -1,5 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -8,13 +20,13 @@ export class UsersController {
   // Frontend'den gelen giriş isteklerini karşılayacak yeni uç nokta
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  login(@Body() body: { username: string, password: string }) {
+  login(@Body() body: { username: string; password: string }) {
     return this.usersService.login(body.username, body.password);
   }
 
   @Post()
-  create(@Body() body: any) {
-    return this.usersService.create(body);
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -28,8 +40,8 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.usersService.update(+id, body);
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(+id, updateUserDto);
   }
 
   @Delete(':id')

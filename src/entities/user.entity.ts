@@ -21,6 +21,6 @@ export class User {
   role: string; // 'admin', 'head', 'member'
 
   // --- İŞTE EKSİK OLAN PARÇA BU ---
-  @Column("simple-array", { nullable: true })
+  @Column('simple-array', { nullable: true })
   managedIds: string[]; // Yetki verilen kişilerin ID'leri burada tutulacak
 }

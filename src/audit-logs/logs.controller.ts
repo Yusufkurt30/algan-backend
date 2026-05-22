@@ -1,13 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { LogsService } from './logs.service';
+import { CreateLogDto } from './dto/create-log.dto';
+import { UpdateLogDto } from './dto/update-log.dto';
 
 @Controller('logs')
 export class LogsController {
   constructor(private readonly logsService: LogsService) {}
 
   @Post()
-  create(@Body() body: any) {
-    return this.logsService.create(body);
+  create(@Body() createLogDto: CreateLogDto) {
+    return this.logsService.create(createLogDto);
   }
 
   @Get()
@@ -21,8 +31,8 @@ export class LogsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() body: any) {
-    return this.logsService.update(+id, body);
+  update(@Param('id') id: string, @Body() updateLogDto: UpdateLogDto) {
+    return this.logsService.update(+id, updateLogDto);
   }
 
   @Delete(':id')

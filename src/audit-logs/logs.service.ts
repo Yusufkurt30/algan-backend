@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Log } from '../entities/log.entity';
+import { CreateLogDto } from './dto/create-log.dto';
+import { UpdateLogDto } from './dto/update-log.dto';
 
 @Injectable()
 export class LogsService {
@@ -10,8 +12,8 @@ export class LogsService {
     private logRepository: Repository<Log>,
   ) {}
 
-  create(body: any) {
-    const newLog = this.logRepository.create(body);
+  create(createLogDto: CreateLogDto) {
+    const newLog = this.logRepository.create(createLogDto);
     return this.logRepository.save(newLog);
   }
 
@@ -23,8 +25,8 @@ export class LogsService {
     return this.logRepository.findOneBy({ id });
   }
 
-  async update(id: number, body: any) {
-    await this.logRepository.update(id, body);
+  async update(id: number, updateLogDto: UpdateLogDto) {
+    await this.logRepository.update(id, updateLogDto);
     return this.findOne(id);
   }
 

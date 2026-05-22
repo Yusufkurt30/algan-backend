@@ -15,10 +15,14 @@ export class AiService {
     this.genAI = new GoogleGenerativeAI(apiKey || '');
   }
 
-  async analyzePerformance(logData: any): Promise<string> {
+  async analyzePerformance(
+    logData: Record<string, unknown> | Record<string, unknown>[],
+  ): Promise<string> {
     try {
       // Hızlı ve mantıksal analizler için flash modelini kullanıyoruz
-    const model = this.genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+      const model = this.genAI.getGenerativeModel({
+        model: 'gemini-2.5-flash',
+      });
 
       // Dokümantasyondaki role büründürme (Prompt Engineering) şablonu
       const prompt = `
@@ -27,11 +31,13 @@ export class AiService {
       [GÖREV]: Yukarıdaki verileri inceleyerek hangi birimin performansının düştüğünü, hangi günlerde laboratuvar katılımının azaldığını tespit et ve liderlere yönetimsel tavsiyeler sun. Raporu profesyonel ve maddeler halinde markdown formatında yaz.`;
 
       const result = await model.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       return response.text();
     } catch (error) {
       console.error('AI Analiz Hatası:', error);
-      throw new InternalServerErrorException('Yapay zeka analizi sırasında bir hata oluştu.');
+      throw new InternalServerErrorException(
+        'Yapay zeka analizi sırasında bir hata oluştu.',
+      );
     }
   }
 }

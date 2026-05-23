@@ -25,13 +25,13 @@ Backend projemiz Nesne Yönelimli Programlama (OOP) ve "SOLID" (özellikle Tek S
 * **Entity Katmanı (Veri Modeli):** TypeORM üzerinden veritabanı tablolarının şemalarını ve veri tiplerini tanımlar.
 * **Global Hata Yönetimi:** Tüm sistemdeki istisnalar (Exceptions), tek bir merkezden (`GlobalExceptionFilter`) yönetilerek istemciye (Frontend) tutarlı ve anlaşılır hata mesajları (HTTP 4xx, 5xx) döndürülür.
 
-## 🤖 ZORUNLU İSTER 1: Yapay Zeka (Gemini Pro 3.1) Kullanımı
+## 🤖 Yapay Zeka (Gemini Pro 3.1) Kullanımı
 Yazılım süreçlerinde **Gemini Pro 3.1** yapay zeka asistanı olarak şu alanlarda aktif rol almıştır:
 * **Mimari Kurgulama ve Temiz Kod:** Backend içerisindeki bağımlılık karmaşası, yapay zekanın "Clean Architecture" önerileri doğrultusunda çözümlenmiş; kod, Service ve Controller yapılarına ayrıştırılmıştır.
 * **Birim Test (Unit Test) Yazımı:** NestJS'in test modülü olan Jest konfigürasyonlarında ve test senaryolarının (`.spec.ts` dosyaları) mock (taklit) verilerle oluşturulmasında yapay zekanın sağladığı taslaklar sayesinde yüksek oranda test kapsamına ulaşılmıştır.
 * **Veri Analitiği (AI Modülü):** Sisteme entegre edilen `/ai/analyze` rotasında toplanan log verileri, yine LLM altyapısıyla anlamlandırılarak yöneticilere performans ve motivasyon raporları (Prompt Engineering kullanılarak) sunulmaktadır.
 
-## 📊 ZORUNLU İSTER 2: Kod Kalitesi ve SonarCloud.io Entegrasyonu
+## 📊 Kod Kalitesi ve SonarCloud.io Entegrasyonu
 Projenin "Teknik Borç" (Technical Debt) oranının akademik ister olan **%5'in altında** tutulması için şu pratikler benimsenmiştir:
 * **Statik Kod Analizi:** Kod tabanı **SonarCloud.io** ile taranmış; tanımlı olmayan türler (any kullanımı), potansiyel null-pointer hataları ve "Code Smell" (kötü kod pratikleri) tespit edilip düzeltilmiştir.
 * **TypeScript Tür Güvenliği:** Sistemin daha güvenilir çalışması için DTO (Data Transfer Object) ve Entity sınıflarındaki eksik tür tanımlamaları tamamlanmış, çalışma zamanı (runtime) hatalarının önüne geçilmiştir.
